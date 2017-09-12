@@ -1,0 +1,147 @@
+
+
+#include<iostream>
+#include<cstdlib>
+
+using namespace std;
+
+class queue
+//Roll No. 153174
+// Lab#3 (27 Feb 2017)
+
+#include<iostream>
+
+using namespace std;
+
+class queue
+{
+    private:
+            int queue1[5];
+            int front;
+            int rear;
+
+    public:
+
+//********************* CONSTRUCTORs **********************
+        queue()
+        {
+            front=-1;
+            rear=-1;
+        }
+
+//*********************************************************
+
+//******************** INSERT AN ELEMENT *******************
+        void insert(int x)
+        {
+            if(rear >=  4)
+            {
+                cout <<"Queue is Over-flowing" << endl;
+                //front=rear=-1;
+                return;
+            }
+                    queue1[++rear]=x;
+                    cout << x << " Processes are inserted in the Queue" << endl;
+        }
+//***********************************************************
+
+//********************* DELETE ******************************
+        void deleteElement()
+        {
+            if(front==rear)
+        {
+            cout << "Queue is Under-flowing" << endl;
+            return;
+        }
+            cout << queue1[++front] << " is Deleted";
+        }
+//***********************************************************
+
+};
+
+int main()
+{
+    // Declaration:
+    int n,i,j;
+    int BurstTime[30];
+    int WaitingTime[30];
+    float TurnAroundTime[30];
+    float AvgWaitingTime=0;
+    float AvgTurnAroundTime=0;
+    queue myqueue;
+    //********************************************************
+
+    // Welcome Note
+    cout << "\t**************** Welcome ****************\t\n";
+    cout << "\t________________________________________________\t\n";
+    cout << endl;
+
+    cout << "FIRST COME FIRST SERVE SCHEDULLING\n";
+    cout << endl;
+    //*******************************************************
+
+
+    // Entering Processes:
+    cout << "Enter Total No. of Processes (Maximum 20 Processes):";
+    cin >> n;
+    while(n<0 || n>20)
+    {
+        cout << "Invalid Input, Queue overflowed\n";
+        cout << "Enter again: ";
+        cin >> n;
+    }
+    myqueue.insert(n);
+    //***************************************************
+
+    cout<<"\nEnter Process Burst Time\n";
+    for(i=0;i<n;i++)
+    {
+        cout<<"P["<<i+1<<"]:";
+        cin>>BurstTime[i]; // Input Burst Time for the Processes
+
+    }
+
+    WaitingTime[0]=0;
+
+    //Calculating WaitingTime for each Process
+    for(i=1;i<n;i++)
+    {
+        WaitingTime[i]=0;
+        for(j=0;j<i;j++)
+            WaitingTime[i]+=BurstTime[j];
+    }
+
+    cout << "\nProcess\t\tBurst Time\tWaiting Time\tTurnaround Time\n";
+    cout << "_______________________________________________________________________________________\n";
+
+    //calculating turnaround time
+    for(i=0;i<n;i++)
+    {
+        //Formula for TurnAroundTime
+        TurnAroundTime[i]=BurstTime[i]+WaitingTime[i];
+
+        //Formula for Average Waiting Time
+        AvgWaitingTime+=WaitingTime[i];
+
+        //Formula for Average TurnAroundTime
+        AvgTurnAroundTime+=TurnAroundTime[i];
+
+        cout<<"\nP["<<i+1<<"]"<<"\t\t"<<BurstTime[i]<<"\t\t"<<WaitingTime[i]<<"\t\t"<<TurnAroundTime[i] << endl;
+
+        cout << "_______________________________________________________________________________________\n";
+
+
+    }
+
+    AvgWaitingTime/=i;
+    AvgTurnAroundTime/=i;
+
+    //Displaying Calculated Data:
+    cout<<"\n\nAverage Waiting Time:"<<AvgWaitingTime;
+    cout<<"\nAverage Turnaround Time:"<<AvgTurnAroundTime;
+
+    return 0;
+}
+
+             return 0;
+             }
